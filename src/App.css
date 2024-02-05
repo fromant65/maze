@@ -1,0 +1,48 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.row{
+  display: flex;
+}
+
+.cell{
+  width: 20px;
+  height: 20px;
+  display:inline-block;
+}
+
+.l-true{
+  border-left: 1px solid black;
+}
+
+.r-true{
+  border-right: 1px solid black;
+}
+
+.t-true{
+  border-top: 1px solid black;
+}
+
+.b-true{
+  border-bottom: 1px solid black;
+}
+
+.l-false{
+  border-left: none;
+}
+
+.r-false{
+  border-right: none;
+}
+
+.t-false{
+  border-top: none;
+}
+
+.b-false{
+  border-bottom: none;
+}
