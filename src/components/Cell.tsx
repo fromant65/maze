@@ -1,19 +1,20 @@
 export interface CellParameters{
-    w:number,
-    h:number,
+    dim: number,
+    player: boolean|'win',
     left: boolean,
     right:boolean,
     top:boolean,
     bottom:boolean
   }
 
-export function Cell({ w,h,left, right, top, bottom }:CellParameters) {
+export function Cell({dim, player,left, right, top, bottom }:CellParameters) {
   
     const cellStyle = {
        position:'relative',
-       width: `${Math.min(40, Math.floor(500/((w+h)/2)))}px`,
-       height: `${Math.min(40, Math.floor(500/((w+h)/2)))}px`,
+       width: `${dim}px`,
+       height: `${dim}px`,
        boxSizing: 'border-box' as 'border-box',
+       background: `${player==='win'?"green":player?"yellow":"white"}`
     };
    
     const borderStyle = {
