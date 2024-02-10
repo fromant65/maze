@@ -4,7 +4,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items:center;
-    
   }
   
   .side {
@@ -13,8 +12,19 @@
     flex-direction: column;
     align-items: center;
     padding:  1em;
+    flex-grow: 1;
   }
   
+  .controls{
+    margin:0.5rem;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .controls button{
+    margin: 0.5rem;
+  }
+
   .stats,
   .movement,
   .restart {

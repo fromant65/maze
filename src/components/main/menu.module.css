@@ -1,0 +1,48 @@
+/* General styles for the navbar */
+.navbar {
+    display: flex;
+    /* Align items horizontally */
+    justify-content: space-around;
+    /* Distribute items evenly */
+    padding: 1rem 0;
+    /* Add some padding around the navbar */
+    background-color: #fff;
+    /* White background */
+    border-bottom: 1px solid #ddd;
+}
+
+/* Style for the link list */
+.linklist {
+    list-style-type: none;
+    /* Remove default list styling */
+    margin: 0;
+    /* Remove default margins */
+    padding: 0;
+    /* Remove default padding */
+    display: flex;
+    /* Align items horizontally */
+}
+
+/* Style for individual links */
+.link {
+    margin: 0 1rem;
+    /* Add some horizontal spacing between links */
+}
+
+/* Style for the anchor tags within the links */
+.link .a {
+    text-decoration: none;
+    /* Remove underline */
+    color: #333;
+    /* Dark gray text */
+    font-size: 1rem;
+    /* Set the font size */
+    transition: color 0.3s ease;
+    /* Smooth color transition */
+}
+
+/* Hover effect for the anchor tags */
+.link .a:hover {
+    color: #007bff;
+    /* Change link color on hover */
+}

@@ -5,27 +5,32 @@ import { Player } from "../../utils/Entities";
 import GameStats from "../game/GameStats";
 import BoardComponent from "./Board";
 import MovementPad from "../movement_gui/MovementPad";
-import styles from "./game.module.css";
+import styles from "./race.module.css";
 
 const GameComponent = () => {
   const [game, setGame] = useState(new Game(1, 15, undefined));
   const [board, setBoard] = useState(new Board(0, 2, 2));
   const [player, setPlayer] = useState(new Player(0, 0));
+  const [isPaused, setIsPaused] = useState(true);
   const dimensions = calcDimensions();
   const gameRef = useRef(game);
 
-  const [isPaused, setIsPaused] = useState(false);
-  
-  function calcDimensions(){
-    const viewportWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    if(viewportHeight>viewportWidth){
-      return Math.min(viewportWidth*0.9, viewportHeight*0.6);
-    }else{
-      return Math.min(viewportWidth*0.6, viewportHeight*0.9);
+  function calcDimensions() {
+    const viewportWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+    const viewportHeight =
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
+    if (viewportHeight > viewportWidth) {
+      return Math.min(viewportWidth * 0.9, viewportHeight * 0.6);
+    } else {
+      return Math.min(viewportWidth * 0.6, viewportHeight * 0.8);
     }
   }
-  
+
   const playGame = () => {
     setIsPaused(false);
   };
@@ -34,8 +39,6 @@ const GameComponent = () => {
     setIsPaused(true);
   };
 
-
-  
   function restartGame() {
     setGame(() => {
       const newGame = new Game(1, 10, undefined);
@@ -46,7 +49,7 @@ const GameComponent = () => {
       return newGame;
     });
   }
-  
+
   useEffect(() => {
     gameRef.current = game;
   }, [game]);
@@ -66,26 +69,26 @@ const GameComponent = () => {
   });
 
   useEffect(() => {
-    let timerId:number;
+    let timerId: number;
 
     if (!isPaused) {
       timerId = setInterval(() => {
         // Use the ref to access the current game state and decrement the timer
-      gameRef.current.timer-=0.1;
-      gameRef.current.timer = parseFloat(gameRef.current.timer.toFixed(1))
-      // Create a new game object with the updated timer value and set it
-      const updatedGame = new Game(
-        gameRef.current.level,
-        gameRef.current.timer,
-        gameRef.current.seed
-      );
-      setGame(updatedGame);
+        gameRef.current.timer -= 0.1;
+        gameRef.current.timer = parseFloat(gameRef.current.timer.toFixed(1));
+        // Create a new game object with the updated timer value and set it
+        const updatedGame = new Game(
+          gameRef.current.level,
+          gameRef.current.timer,
+          gameRef.current.seed
+        );
+        setGame(updatedGame);
 
-      // Check the updated timer value in the ref to restart the game
-      if (gameRef.current.timer <= 0) {
-        restartGame();
-      }
-      },  100);
+        // Check the updated timer value in the ref to restart the game
+        if (gameRef.current.timer <= 0) {
+          restartGame();
+        }
+      }, 100);
     }
 
     // Clear the interval when the component unmounts or when isPaused changes
@@ -105,13 +108,19 @@ const GameComponent = () => {
         <div className={styles.stats}>
           <GameStats level={game.level} timer={game.timer} />
         </div>
-        <div className={styles.movement}>
-          <MovementPad player={player} setPlayer={setPlayer} board={board} isPaused ={isPaused}/>
-        </div>
         <div className={styles.controls}>
-        <button onClick={playGame}>Play</button>
-        <button onClick={pauseGame}>Pause</button>
-      </div>
+          <button onClick={playGame}>Play</button>
+          <button onClick={pauseGame}>Pause</button>
+        </div>
+        <div className={styles.movement}>
+          <MovementPad
+            player={player}
+            setPlayer={setPlayer}
+            board={board}
+            isPaused={isPaused}
+          />
+        </div>
+        
       </div>
       <div className={styles.board}>
         <BoardComponent

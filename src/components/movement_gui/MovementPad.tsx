@@ -7,7 +7,7 @@ interface State {
   player: Player;
   setPlayer: Function;
   board: Board;
-  isPaused: boolean
+  isPaused: boolean;
 }
 
 const MovementPad = ({ player, setPlayer, board, isPaused }: State) => {
@@ -18,15 +18,15 @@ const MovementPad = ({ player, setPlayer, board, isPaused }: State) => {
         checkMovement("u");
         break;
       case "a":
-      case "ArrowLeft": 
+      case "ArrowLeft":
         checkMovement("l");
         break;
-      case "s" :
+      case "s":
       case "ArrowDown":
         checkMovement("d");
         break;
       case "d":
-      case "ArrowRight": 
+      case "ArrowRight":
         checkMovement("r");
         break;
       default:
@@ -35,34 +35,43 @@ const MovementPad = ({ player, setPlayer, board, isPaused }: State) => {
   }
 
   useEffect(() => {
-    if(!isPaused){
-      window.addEventListener("keydown", handleKeyDown);
-    }
+    window.addEventListener("keydown", handleKeyDown);
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   });
 
   function checkMovement(movement: string) {
-    let x = player.x;
-    let y = player.y;
-    let newPlayer = new Player(x, y);
-    newPlayer.move(board, movement);
-    setPlayer(newPlayer);
+    if (!isPaused) {
+      let x = player.x;
+      let y = player.y;
+      let newPlayer = new Player(x, y);
+      newPlayer.move(board, movement);
+      setPlayer(newPlayer);
+    }
   }
   return (
     <div className={styles.container}>
-  <div className={styles.row}>
-    <button className={styles.button} onClick={() => checkMovement("u")}>↑</button>
-  </div>
-  <div className={styles.row}>
-    <button className={styles.button} onClick={() => checkMovement("l")}>←</button>
-    <button className={styles.button} onClick={() => checkMovement("r")}>→</button>
-  </div>
-  <div className={styles.row}>
-    <button className={styles.button} onClick={() => checkMovement("d")}>↓</button>
-  </div>
-</div>
+      <div className={styles.row}>
+        <button className={styles.button} onClick={() => checkMovement("u")}>
+          ↑
+        </button>
+      </div>
+      <div className={styles.row}>
+        <button className={styles.button} onClick={() => checkMovement("l")}>
+          ←
+        </button>
+        <button className={styles.button} onClick={() => checkMovement("r")}>
+          →
+        </button>
+      </div>
+      <div className={styles.row}>
+        <button className={styles.button} onClick={() => checkMovement("d")}>
+          ↓
+        </button>
+      </div>
+    </div>
   );
 };
 

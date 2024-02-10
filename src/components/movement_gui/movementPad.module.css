@@ -12,6 +12,8 @@
   }
   
   .button {
-    border: 1px solid black;
-    padding: 20px;
+    border: 1px solid #ddd;
+    padding: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }

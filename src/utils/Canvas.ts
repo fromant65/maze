@@ -56,6 +56,15 @@ export default class Canvas {
           }
         });
       });
+      //Green goal
+      let goalBlockSize = blockSize * 0.7;
+      let goalX =
+        (board.height - 1) * blockSize + (blockSize - goalBlockSize) / 2;
+      let goalY =
+        (board.width - 1) * blockSize + (blockSize - goalBlockSize) / 2;
+      this.ctx.fillStyle = "#8f8";
+
+      this.ctx.fillRect(goalX, goalY, goalBlockSize, goalBlockSize);
     }
   }
 
