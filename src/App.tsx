@@ -1,10 +1,9 @@
 import "./App.css";
-import GameComponent from "./components/main/Game";
-
+import Menu from "./components/main/Menu";
 function App() {
   return (
     <>
-      <GameComponent/>
+      <Menu/>
     </>
   );
 }

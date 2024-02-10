@@ -14,6 +14,8 @@ const GameComponent = () => {
   const dimensions = calcDimensions();
   const gameRef = useRef(game);
 
+  const [isPaused, setIsPaused] = useState(false);
+  
   function calcDimensions(){
     const viewportWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -23,11 +25,17 @@ const GameComponent = () => {
       return Math.min(viewportWidth*0.6, viewportHeight*0.9);
     }
   }
+  
+  const playGame = () => {
+    setIsPaused(false);
+  };
 
-  useEffect(() => {
-    gameRef.current = game;
-  }, [game]);
+  const pauseGame = () => {
+    setIsPaused(true);
+  };
 
+
+  
   function restartGame() {
     setGame(() => {
       const newGame = new Game(1, 10, undefined);
@@ -38,6 +46,10 @@ const GameComponent = () => {
       return newGame;
     });
   }
+  
+  useEffect(() => {
+    gameRef.current = game;
+  }, [game]);
 
   useEffect(() => {
     restartGame();
@@ -54,8 +66,11 @@ const GameComponent = () => {
   });
 
   useEffect(() => {
-    const timerId = setInterval(() => {
-      // Use the ref to access the current game state and decrement the timer
+    let timerId:number;
+
+    if (!isPaused) {
+      timerId = setInterval(() => {
+        // Use the ref to access the current game state and decrement the timer
       gameRef.current.timer-=0.1;
       gameRef.current.timer = parseFloat(gameRef.current.timer.toFixed(1))
       // Create a new game object with the updated timer value and set it
@@ -70,23 +85,33 @@ const GameComponent = () => {
       if (gameRef.current.timer <= 0) {
         restartGame();
       }
-    }, 100);
+      },  100);
+    }
 
-    // Clear the interval when the component unmounts
+    // Clear the interval when the component unmounts or when isPaused changes
     return () => {
-      clearInterval(timerId);
+      if (timerId) {
+        clearInterval(timerId);
+      }
     };
-  }, []);
+  }, [isPaused]);
 
   return (
     <div className={styles.gameComponent}>
-      <div className={styles.left}>
+      <div className={styles.side}>
         <div className={styles.restart}>
           <button onClick={restartGame}>Restart Game</button>
         </div>
         <div className={styles.stats}>
           <GameStats level={game.level} timer={game.timer} />
         </div>
+        <div className={styles.movement}>
+          <MovementPad player={player} setPlayer={setPlayer} board={board} isPaused ={isPaused}/>
+        </div>
+        <div className={styles.controls}>
+        <button onClick={playGame}>Play</button>
+        <button onClick={pauseGame}>Pause</button>
+      </div>
       </div>
       <div className={styles.board}>
         <BoardComponent
@@ -95,11 +120,6 @@ const GameComponent = () => {
           player={player}
           board={board}
         />
-      </div>
-      <div className={styles.right}>
-        <div className={styles.movement}>
-          <MovementPad player={player} setPlayer={setPlayer} board={board} />
-        </div>
       </div>
     </div>
   );

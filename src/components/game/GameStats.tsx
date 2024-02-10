@@ -9,8 +9,8 @@ const GameStats = ({ level, timer }:State) => {
   return (
     <div className={styles.gameStats}>
       <div className={styles.gameStatItem}>
-        <span className={styles.gameStatLabel}>Board: Level</span>
-        <span className={styles.gameStatValue}>{level}</span>
+        <span className={styles.gameStatLabel}>Board:</span>
+        <span className={styles.gameStatValue}>Level {level}</span>
       </div>
       <div className={styles.gameStatItem}>
         <span className={styles.gameStatLabel}>Seconds left:</span>

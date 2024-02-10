@@ -8,10 +8,10 @@
   .row {
     display: flex;
     justify-content: space-around;
-    width:  175%;
+    width:  190%;
   }
   
   .button {
-    padding: 8px;
-    margin:  5px;
+    border: 1px solid black;
+    padding: 20px;
   }

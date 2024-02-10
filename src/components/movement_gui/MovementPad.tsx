@@ -7,9 +7,10 @@ interface State {
   player: Player;
   setPlayer: Function;
   board: Board;
+  isPaused: boolean
 }
 
-const MovementPad = ({ player, setPlayer, board }: State) => {
+const MovementPad = ({ player, setPlayer, board, isPaused }: State) => {
   function handleKeyDown(e: any) {
     switch (e.key) {
       case "w":
@@ -34,7 +35,9 @@ const MovementPad = ({ player, setPlayer, board }: State) => {
   }
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
+    if(!isPaused){
+      window.addEventListener("keydown", handleKeyDown);
+    }
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };

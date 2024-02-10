@@ -4,10 +4,11 @@
     flex-direction: row;
     justify-content: space-between;
     align-items:center;
+    
   }
   
-  .left,
-  .right {
+  .side {
+    margin:1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
