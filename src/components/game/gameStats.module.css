@@ -1,0 +1,24 @@
+.gameStats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding:  1rem;
+    margin: 5px;
+    border-radius:  5px;
+    box-shadow:  0  2px  4px rgba(0,  0,  0,  0.1);
+  }
+  
+  .gameStatItem {
+    margin-bottom:  0.5rem;
+    font-weight: bold;
+  }
+  
+  .gameStatLabel {
+    color: #666;
+    margin-right:  0.5rem;
+  }
+  
+  .gameStatValue {
+    color: #333;
+  }

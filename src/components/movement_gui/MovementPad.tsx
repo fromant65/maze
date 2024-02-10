@@ -1,6 +1,7 @@
-import { Player } from "../utils/Entities";
-import Board from "../utils/Board";
+import { Player } from "../../utils/Entities";
+import Board from "../../utils/Board";
 import { useEffect } from "react";
+import styles from "./movementPad.module.css";
 
 interface State {
   player: Player;
@@ -47,12 +48,18 @@ const MovementPad = ({ player, setPlayer, board }: State) => {
     setPlayer(newPlayer);
   }
   return (
-    <div>
-      <button onClick={() => checkMovement("l")}>left</button>
-      <button onClick={() => checkMovement("d")}>down</button>
-      <button onClick={() => checkMovement("u")}>up</button>
-      <button onClick={() => checkMovement("r")}>right</button>
-    </div>
+    <div className={styles.container}>
+  <div className={styles.row}>
+    <button className={styles.button} onClick={() => checkMovement("u")}>↑</button>
+  </div>
+  <div className={styles.row}>
+    <button className={styles.button} onClick={() => checkMovement("l")}>←</button>
+    <button className={styles.button} onClick={() => checkMovement("r")}>→</button>
+  </div>
+  <div className={styles.row}>
+    <button className={styles.button} onClick={() => checkMovement("d")}>↓</button>
+  </div>
+</div>
   );
 };
 

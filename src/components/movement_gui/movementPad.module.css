@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-around;
+    width:  175%;
+  }
+  
+  .button {
+    padding: 8px;
+    margin:  5px;
+  }

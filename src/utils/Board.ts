@@ -25,8 +25,8 @@ export default class Board {
   populateMaze() {
     let generator = new BoardGenerator(this.seed);
     generator.generateBySeed(this.grid[0][0], this);
-    console.log("Finished populating maze: ");
-    console.log(this);
+    //console.log("Finished populating maze: ");
+    //console.log(this);
   }
   getCell(x: number, y: number) {
     if (x < 0 || x >= this.height || y < 0 || y >= this.width) return null;

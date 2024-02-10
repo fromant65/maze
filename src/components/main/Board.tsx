@@ -1,13 +1,15 @@
 import { useEffect, useRef } from "react";
-import Board from "../utils/Board";
-import { Player } from "../utils/Entities";
+import Board from "../../utils/Board";
+import { Player } from "../../utils/Entities";
 
 interface State {
   board: Board;
   player: Player;
+  width:number;
+  height:number
 }
 
-const BoardComponent = ({ board, player }: State) => {
+const BoardComponent = ({ board, player, width, height }: State) => {
   const canvas: HTMLCanvasElement | null = null;
   const canvasRef = useRef(canvas);
 
@@ -93,7 +95,7 @@ const BoardComponent = ({ board, player }: State) => {
     if (canvas) drawBoard(canvas);
   }, [board, player]);
 
-  return <canvas ref={canvasRef} width="500" height="500"></canvas>;
+  return <canvas ref={canvasRef} width={width} height={height}></canvas>;
 };
 
 export default BoardComponent;

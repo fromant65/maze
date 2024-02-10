@@ -1,0 +1,47 @@
+/* App.module.css */
+.gameComponent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+  }
+  
+  .left,
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:  1em;
+  }
+  
+  .stats,
+  .movement,
+  .restart {
+    order:  1;
+  }
+  
+  .board {
+    order:  2;
+    flex-grow:  1;
+  }
+  
+  /* For smaller screens */
+  @media (max-width:  768px) {
+    .gameComponent {
+      flex-direction: column;
+    }
+  
+    .stats,
+    .movement,
+    .restart {
+      order:  0;
+    }
+  
+    .board {
+      order:  1;
+      width:  100%;
+      max-width:  500px;
+      margin:  0 auto;
+    }
+  }
+  
