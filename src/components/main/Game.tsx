@@ -11,7 +11,7 @@ const GameComponent = () => {
   const [game, setGame] = useState(new Game(1, 15, undefined));
   const [board, setBoard] = useState(new Board(0, 2, 2));
   const [player, setPlayer] = useState(new Player(0, 0));
-  const [dimensions, setDimensions] = useState(calcDimensions());
+  const dimensions = calcDimensions();
   const gameRef = useRef(game);
 
   function calcDimensions(){
