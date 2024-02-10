@@ -40,7 +40,6 @@ const GameComponent = () => {
   }
 
   useEffect(() => {
-    console.log(styles);
     restartGame();
   }, []);
 
@@ -57,8 +56,8 @@ const GameComponent = () => {
   useEffect(() => {
     const timerId = setInterval(() => {
       // Use the ref to access the current game state and decrement the timer
-      gameRef.current.timer--;
-
+      gameRef.current.timer-=0.1;
+      gameRef.current.timer = parseFloat(gameRef.current.timer.toFixed(1))
       // Create a new game object with the updated timer value and set it
       const updatedGame = new Game(
         gameRef.current.level,
@@ -71,7 +70,7 @@ const GameComponent = () => {
       if (gameRef.current.timer <= 0) {
         restartGame();
       }
-    }, 1000);
+    }, 100);
 
     // Clear the interval when the component unmounts
     return () => {
